@@ -1,0 +1,11 @@
+{
+  "testEnvironment": "node",
+  "testMatch": ["**/tests/**/*.test.js"],
+  "collectCoverageFrom": ["src/**/*.js", "!src/prisma/**"],
+  "coverageThreshold": {
+    "global": {
+      "lines": 60
+    }
+  },
+  "testTimeout": 10000
+}

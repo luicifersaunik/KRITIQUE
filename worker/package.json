@@ -1,0 +1,23 @@
+{
+  "name": "kritique-worker",
+  "version": "1.0.0",
+  "description": "Kritique worker - processes AI review jobs from Bull queue",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.15.0",
+    "@prisma/client": "^5.13.0",
+    "bull": "^4.12.2",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4",
+    "prisma": "^5.13.0"
+  }
+}

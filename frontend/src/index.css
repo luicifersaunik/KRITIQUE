@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0f0f17] text-[#cdd6f4] font-sans antialiased;
+    font-family: "Inter", sans-serif;
+  }
+
+  code, pre {
+    font-family: "JetBrains Mono", monospace;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-500 hover:bg-brand-600 text-white font-semibold px-4 py-2 rounded-lg 
+           transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply bg-[#1e1e2e] border border-[#313244] rounded-xl p-6;
+  }
+
+  .input {
+    @apply bg-[#181825] border border-[#313244] rounded-lg px-3 py-2 text-sm 
+           text-[#cdd6f4] placeholder-[#585b70] focus:outline-none focus:ring-2 
+           focus:ring-brand-500 w-full transition-colors;
+  }
+}
+
+/* Markdown styles for AI review output */
+.review-content h2 {
+  @apply text-lg font-bold text-[#cba6f7] mt-6 mb-2 flex items-center gap-2;
+}
+.review-content h3 {
+  @apply text-base font-semibold text-[#89b4fa] mt-4 mb-1;
+}
+.review-content p {
+  @apply text-sm text-[#cdd6f4] leading-relaxed mb-3;
+}
+.review-content ul {
+  @apply list-disc list-inside text-sm text-[#cdd6f4] space-y-1 mb-3;
+}
+.review-content code {
+  @apply bg-[#181825] text-[#a6e3a1] px-1.5 py-0.5 rounded text-xs;
+}
+.review-content pre {
+  @apply bg-[#181825] rounded-lg p-4 overflow-x-auto text-xs mb-3 border border-[#313244];
+}
+.review-content strong {
+  @apply text-[#f38ba8] font-semibold;
+}
+.review-content hr {
+  @apply border-[#313244] my-4;
+}
