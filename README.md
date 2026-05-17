@@ -99,6 +99,33 @@ docker compose up --build
 
 ---
 
+## Render Deployment
+
+This repo is a monorepo. Deploy it on Render as separate services:
+
+| Service | Render type | Root directory | Build command | Start / publish |
+|---|---|---|---|---|
+| Backend API | Web Service | `backend` | `npm ci --include=dev && npx prisma generate --schema src/prisma/schema.prisma` | `npm start` |
+| Worker | Background Worker | `worker` | `npm ci --include=dev && npx prisma generate --schema prisma/schema.prisma` | `npm start` |
+| Frontend | Static Site | `frontend` | `npm ci && npm run build` | publish `dist` |
+
+The worker is not supposed to bind to an HTTP port. If Render shows `No open ports detected` while starting `kritique-worker`, the worker was created as a Web Service. Create it as a Background Worker instead.
+
+The included `render.yaml` defines the intended topology: backend web service, worker, static frontend, Render Postgres, and Render Key Value. During Blueprint creation, provide:
+
+- `GEMINI_API_KEY` for the worker
+- `FRONTEND_URL` for backend CORS, for example `https://<frontend-service>.onrender.com`
+- `VITE_API_URL` for the frontend build, for example `https://<backend-service>.onrender.com/api`
+
+Until Prisma migrations are committed, initialize the Render Postgres schema once with:
+
+```bash
+cd backend
+DATABASE_URL="<render-postgres-connection-string>" npx prisma db push --schema src/prisma/schema.prisma
+```
+
+---
+
 ## Key Features
 
 - **Real-time streaming** — AI review appears word-by-word via SSE, no waiting for full response

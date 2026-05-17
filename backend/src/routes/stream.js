@@ -79,11 +79,17 @@ router.get("/:reviewId", async (req, res) => {
     }
   });
 
+  let cleaningUp = false;
   const cleanup = () => {
+    if (cleaningUp) return;
+    cleaningUp = true;
+    
     clearInterval(heartbeat);
-    subscriber.unsubscribe(channel);
-    subscriber.quit();
-    res.end();
+    subscriber.unsubscribe(channel).catch(() => {});
+    subscriber.quit().catch(() => {});
+    if (!res.writableEnded) {
+      res.end();
+    }
   };
 
   req.on("close", cleanup);
